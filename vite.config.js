@@ -1,15 +1,18 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import path from 'path'
 
 export default defineConfig({
   plugins: [react()],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    },
+  },
   optimizeDeps: {
-    // Exclude packages that shouldn't be pre-bundled
     exclude: [],
-    // Entries point for dependency pre-bundling
     entries: ['./src/**/*.{js,jsx,ts,tsx}'],
-    // Hold the first optimizeDeps run until all dependencies are discovered
-    holdUntilCrawlEnd: true
+    holdUntilCrawlEnd: true,
   },
   server: {
     port: 3000,
@@ -19,12 +22,8 @@ export default defineConfig({
     watch: false,
     cors: {
       origin: '*',
-      credentials: true
+      credentials: true,
     },
-    allowedHosts: [
-      '.modal.host',
-      'localhost',
-      '127.0.0.1'
-    ]
-  }
+    allowedHosts: ['.modal.host', 'localhost', '127.0.0.1'],
+  },
 })

@@ -2,8 +2,9 @@
 > vibe-generated-app@1.0.0 dev
 > vite
 
+Re-optimizing dependencies because vite config has changed
 
-  VITE v5.4.20  ready in 253 ms
+  VITE v5.4.20  ready in 276 ms
 
   ➜  Local:   http://localhost:3000/
   ➜  Network: http://172.20.2.90:3000/

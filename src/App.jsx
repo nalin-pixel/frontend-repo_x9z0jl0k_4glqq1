@@ -7,6 +7,8 @@ import ConversationPanel from './components/ConversationPanel'
 import StaticRobotPanel from './components/StaticRobotPanel'
 import RecommendationList from './components/RecommendationList'
 import LoadingOverlay from './components/LoadingOverlay'
+import BackgroundPaths from '@/components/ui/background-paths'
+import TextReveal from '@/components/ui/text-reveal'
 
 const API_BASE = import.meta.env.VITE_BACKEND_URL || 'http://localhost:8000'
 
@@ -34,7 +36,6 @@ function App() {
 
       const data = await res.json()
 
-      // Update conversation
       setMessages((prev) => [
         ...prev,
         { role: 'user', content: text },
@@ -49,12 +50,28 @@ function App() {
     }
   }
 
+  const focusDecisionInput = () => {
+    const el = document.querySelector('textarea')
+    if (el) {
+      el.focus()
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    }
+  }
+
   return (
     <AppShell>
       <TopBarBrand />
 
       {!started && (
-        <DecisionHero onSubmit={callAnalyze} loading={loading} />
+        <>
+          <DecisionHero onSubmit={callAnalyze} loading={loading} />
+          <BackgroundPaths title="Entiende por qué decides" onCta={focusDecisionInput} />
+          <TextReveal
+            text={
+              'EVERCONN mini te ayuda a entender por qué decides, no solo qué compras. No muestra catálogos. Escucha tu contexto, tu presupuesto y tus miedos, y devuelve rutas claras con lo que ganas y lo que sacrificas.'
+            }
+          />
+        </>
       )}
 
       <MainLayout
